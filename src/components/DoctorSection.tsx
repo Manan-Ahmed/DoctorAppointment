@@ -126,15 +126,8 @@ setShowDoctors(alldoctorResolved)
 
         {
           ishome ? <Link href={'/doctor'}><Button>See All</Button></Link>
-            : <Select>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Theme" />
-              </SelectTrigger>
-              <SelectContent>
-              
-
-              </SelectContent>
-            </Select>
+            : ''
+            
         }
  
 

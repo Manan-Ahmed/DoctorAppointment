@@ -70,14 +70,15 @@ export default function DoctorAppointment({appointment,status}:any){
        
 <CardContent className="space-y-2">
 <p className="text-sm text-muted-foreground">
-  {appointment.doctorinfo.bio}
+  Bio:{appointment.doctorinfo.bio}
 </p>
 <div className="flex items-center gap-2 text-sm">
   <Calendar className="h-4 w-4" />
   <span>
-    {dayjs(new Date(appointment.appointmentDate)).fromNow() +
+    {appointment.appointmentDate}
+    {/* {dayjs(new Date(appointment.appointmentDate)).fromNow() +
       " " +
-      dayjs(new Date(appointment.date)).format("dd DD MMMM")}
+      dayjs(new Date(appointment.date)).format("dd DD MMMM")} */}
   </span>
 </div>
 <div className="flex items-center gap-2 text-sm">

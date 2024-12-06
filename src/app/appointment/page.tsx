@@ -10,6 +10,7 @@ import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 import DoctorAppointment from "@/components/Doctorapointment/doctorappointment"
 import PattientAppointment from "@/components/Doctorapointment/pattientppointment"
+import { currentUser } from "@/lib/data"
 dayjs.extend(relativeTime)
 
 
@@ -47,18 +48,20 @@ export default function Appointment(){
 const [doctorData,setDoctorData] = useState<DocumentData>([])
 const [userData,setUserData] = useState<DocumentData>([])
 
-const [userRole,setUserRole] = useState()
-  const currentuser = auth.currentUser?.uid
+const [loading,setLoading] = useState(true)
 const {user} = useAuthContext()!
 
+const currentUser = auth.currentUser?.uid
 
 useEffect(()=>{
-  fetchDoctorData()
+  if(currentUser){
+    fetchDoctorData()
+    setLoading(false)
+  }
   
   
-},[])
+},[user])
    
-  const currentUser = auth.currentUser?.uid
     
 
 const fetchDoctorData = async()=>{
@@ -84,15 +87,19 @@ setDoctorData(doctorRef)
 }
 
 
-const isDoctor = user?.role === 'doctor'
 
     return(
         <>
+   
+   
         <div className="container mx-auto">
             <h1 className="text-4xl text-center font-bold m-4">Appointment</h1>
 
            
         </div>
+
+
+        {loading ? <h1 className="text-center text-3xl flex justify-center">loading...</h1> :
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
 
@@ -128,7 +135,7 @@ const isDoctor = user?.role === 'doctor'
 
 
         </div>
-         
+}
         </>
     )
 }
